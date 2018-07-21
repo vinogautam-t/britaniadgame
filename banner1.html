@@ -21,7 +21,6 @@
 	margin: 0 auto;
 }
 #canvas {
-    background:url(img/back-banner.jpg);
     width: 320px;
     height: 480px;
 }
@@ -98,7 +97,10 @@
 	        ctx.clearTo = function() {
 	        	image = new Image();
         		image.src = 'img/front-banner.jpg';
-	            ctx.drawImage(image, 0, 0, 320, 480)
+        		image.onload = function() {
+		            ctx.drawImage(image, 0, 0, 320, 480);
+		            document.getElementById('playarea').style.background = "url(img/back-banner.jpg)";
+		        }
 	        };
 	        ctx.clearTo();
 
@@ -134,8 +136,8 @@
 	            	return;
 	            }
 
-	            var x = e.pageX - document.getElementById('playarea').offsetLeft - this.offsetLeft;
-	            var y = e.pageY - document.getElementById('playarea').offsetTop - this.offsetTop;
+	            var x = e.touches[0].pageX - document.getElementById('playarea').offsetLeft - this.offsetLeft;
+	            var y = e.touches[0].pageY - document.getElementById('playarea').offsetTop - this.offsetTop;
 	            document.getElementById('machine').classList.remove("animate");
 
 	            document.getElementById('machine').style.top = (y-60)+'px';
@@ -155,10 +157,10 @@
 	        canvas.node.onmouseup = function(e) {
 	            canvas.isDrawing = false;
 	        };
-	        canvas.node.touchstart = function(e) {
+	        canvas.node.ontouchstart = function(e) {
 	            canvas.isDrawing = true;
 	        };
-	        canvas.node.touchend = function(e) {
+	        canvas.node.ontouchend = function(e) {
 	            canvas.isDrawing = false;
 	        };
 	    }
