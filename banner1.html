@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Banner1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style type="text/css">
+@font-face {
+    font-family: 'Pixellari';
+    src: url('fonts/Pixellari.eot');
+    src: url('fonts/Pixellari.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Pixellari.woff2') format('woff2'),
+        url('fonts/Pixellari.woff') format('woff'),
+        url('fonts/Pixellari.ttf') format('truetype'),
+        url('fonts/Pixellari.svg#Pixellari') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+#playarea{
+	position: relative;
+	width: 320px;
+	margin: 0 auto;
+}
+#canvas {
+    background:url(img/back-banner.jpg);
+    width: 320px;
+    height: 480px;
+}
+#machine{position: absolute;left: 90px;top: 190px;pointer-events: none;}
+.animate{
+    transform-origin: -20% -20%;
+    animation: jump 1s linear alternate infinite;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes jump {
+  0%   {transform: translate(0,-30%);}
+  100% {transform: translate(0,30%);}
+}
+@keyframes big {
+  0%   {transform: scale(0.7,0.7)}
+  100% {transform: scale(0.8,0.8) }
+}
+#showatlast{
+    display: none;
+    position: absolute;
+    bottom: 65px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+#showatlast a.download { text-decoration: none; display: inline-block; font-family: 'Pixellari';font-size: 40px;color: #FFFFFF;line-height: 42px;font-weight: 500;text-transform: uppercase;letter-spacing: 0;text-shadow: 3px 2px black;padding: 9px 10px 3px;margin: 0 0 10px 0;letter-spacing: 0.02em; background: url(img/button-bg.png) no-repeat 0 0; background-size: 100% 100%; animation: big 1s linear alternate infinite; }
+#showatlast a.download:hover { text-shadow: 3px 2px #d44d51; }
+#showatlast a.play { display: inline-block; transition: all 0.2s ease-in-out;transform: scale(0.8,0.8) }
+#showatlast a.play:hover {filter:grayscale(100%);transform: scale(0.85,0.85); }
+</style>
+</head>
+<body>
+    <div id="playarea">
+	    <div id="canvas"></div>
+	    <img id="machine" class="animate" src="img/machin.png">
+	    <span id="showatlast">
+	    	<a href="#" class="download">DOWNLOAD</a>
+	    	<a href="#" class="play"><img src="img/google-play.png" alt=""></a>
+	    </span>
+	</div>
+    <script type="text/javascript">
+    	(function() {
+	    // Creates a new canvas element and appends it as a child
+	    // to the parent element, and returns the reference to
+	    // the newly created canvas element
+
+
+	    function createCanvas(parent, width, height) {
+	        var canvas = {};
+	        canvas.node = document.createElement('canvas');
+	        canvas.context = canvas.node.getContext('2d');
+	        canvas.node.width = width || 100;
+	        canvas.node.height = height || 100;
+	        parent.appendChild(canvas.node);
+	        return canvas;
+	    }
+
+	    function init(container, width, height, fillColor) {
+	        var canvas = createCanvas(container, width, height);
+	        var ctx = canvas.context;
+	        // define a custom fillCircle method
+	        ctx.fillCircle = function(x, y, radius, fillColor) {
+	            this.fillStyle = fillColor;
+	            this.beginPath();
+	            this.moveTo(x, y);
+	            this.arc(x, y, radius, 0, Math.PI * 2, false);
+	            this.fill();
+	        };
+	        ctx.clearTo = function() {
+	        	image = new Image();
+        		image.src = 'img/front-banner.jpg';
+	            ctx.drawImage(image, 0, 0, 320, 480)
+	        };
+	        ctx.clearTo();
+
+	        // bind mouse events
+	        canvas.node.onmousemove = function(e) {
+	            if(erasecount > 250){
+	            	ctx.clearRect(0, 0, 320, 480);
+	            	document.getElementById('machine').style.display = "none";
+	            	document.getElementById('showatlast').style.display = "block";
+	            	return;
+	            }
+
+	            var x = e.pageX - document.getElementById('playarea').offsetLeft - this.offsetLeft;
+	            var y = e.pageY - document.getElementById('playarea').offsetTop - this.offsetTop;
+	            document.getElementById('machine').classList.remove("animate");
+
+	            document.getElementById('machine').style.top = (y-60)+'px';
+	            document.getElementById('machine').style.left = (x-70)+'px';
+				if (!canvas.isDrawing) {
+	               return;
+	            }
+	            erasecount++;
+	            var radius = 30; // or whatever
+	            var fillColor = '#ff0000';
+	            ctx.globalCompositeOperation = 'destination-out';
+	            ctx.fillCircle(x, y, radius, fillColor);
+	        };
+	        canvas.node.ontouchmove = function(e) {
+	            if(erasecount > 250){
+	            	ctx.clearRect(0, 0, 320, 480);
+	            	document.getElementById('machine').style.display = "none";
+	            	document.getElementById('showatlast').style.display = "block";
+	            	return;
+	            }
+
+	            var x = e.pageX - document.getElementById('playarea').offsetLeft - this.offsetLeft;
+	            var y = e.pageY - document.getElementById('playarea').offsetTop - this.offsetTop;
+	            document.getElementById('machine').classList.remove("animate");
+
+	            document.getElementById('machine').style.top = (y-60)+'px';
+	            document.getElementById('machine').style.left = (x-70)+'px';
+				if (!canvas.isDrawing) {
+	               return;
+	            }
+	            erasecount++;
+	            var radius = 30; // or whatever
+	            var fillColor = '#ff0000';
+	            ctx.globalCompositeOperation = 'destination-out';
+	            ctx.fillCircle(x, y, radius, fillColor);
+	        };
+	        canvas.node.onmousedown = function(e) {
+	            canvas.isDrawing = true;
+	        };
+	        canvas.node.onmouseup = function(e) {
+	            canvas.isDrawing = false;
+	        };
+	        canvas.node.touchstart = function(e) {
+	            canvas.isDrawing = true;
+	        };
+	        canvas.node.touchend = function(e) {
+	            canvas.isDrawing = false;
+	        };
+	    }
+
+	    var container = document.getElementById('canvas');
+	    var erasecount = 0;
+	    init(container, 320, 480, '#ddd');
+
+	})();
+    </script>
+</body>
+</html>
