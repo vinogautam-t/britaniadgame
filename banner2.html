@@ -145,7 +145,7 @@ var myGameArea = {
         this.canvas.height = 215;
         this.context = this.canvas.getContext("2d");
         this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 5);
+        this.interval = setInterval(updateGameArea, 10);
         document.getElementById('banner1').style.display = 'none';
 
           addEventListener('keydown', function (e) {
@@ -292,7 +292,7 @@ function updateGameArea() {
   }
   
     for (i = 0; i < myObstacles.length; i += 1) {
-        myObstacles[i].x += myObstacles[i].z === 0 ? -2 : -1;
+        myObstacles[i].x += -1;
         myObstacles[i].update();
     }
     
