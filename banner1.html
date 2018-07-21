@@ -117,8 +117,24 @@
 	            var y = e.pageY - document.getElementById('playarea').offsetTop - this.offsetTop;
 	            document.getElementById('machine').classList.remove("animate");
 
-	            document.getElementById('machine').style.top = (y-60)+'px';
-	            document.getElementById('machine').style.left = (x-70)+'px';
+	            
+	            if(y <= 60){
+	            	 document.getElementById('machine').style.top = '0px';
+	            } else if (y >= 280){
+	            	 y = 260;
+	            	 document.getElementById('machine').style.top = '260px';
+	            } else {
+	            	 document.getElementById('machine').style.top = (y-60)+'px';
+	            }
+
+	            if(x <= 70){
+	            	 document.getElementById('machine').style.left = '0px';
+	            } else if (x >= 184){
+	            	 document.getElementById('machine').style.left = '184px';
+	            } else {
+	            	 document.getElementById('machine').style.left = (x-70)+'px';
+	            }
+
 				if (!canvas.isDrawing) {
 	               return;
 	            }
@@ -140,8 +156,22 @@
 	            var y = e.touches[0].pageY - document.getElementById('playarea').offsetTop - this.offsetTop;
 	            document.getElementById('machine').classList.remove("animate");
 
-	            document.getElementById('machine').style.top = (y-60)+'px';
-	            document.getElementById('machine').style.left = (x-70)+'px';
+	            if(y <= 60){
+	            	 document.getElementById('machine').style.top = '0px';
+	            } else if (y >= 280){
+	            	 y = 260;
+	            	 document.getElementById('machine').style.top = '260px';
+	            } else {
+	            	 document.getElementById('machine').style.top = (y-60)+'px';
+	            }
+
+	            if(x <= 70){
+	            	 document.getElementById('machine').style.left = '0px';
+	            } else if (x >= 184){
+	            	 document.getElementById('machine').style.left = '184px';
+	            } else {
+	            	 document.getElementById('machine').style.left = (x-70)+'px';
+	            }
 				if (!canvas.isDrawing) {
 	               return;
 	            }
