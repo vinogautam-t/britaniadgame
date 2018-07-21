@@ -3,9 +3,22 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
+@font-face {
+    font-family: 'Pixellari';
+    src: url('fonts/Pixellari.eot');
+    src: url('fonts/Pixellari.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Pixellari.woff2') format('woff2'),
+        url('fonts/Pixellari.woff') format('woff'),
+        url('fonts/Pixellari.ttf') format('truetype'),
+        url('fonts/Pixellari.svg#Pixellari') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+body{margin: 0;}
 #playarea {
     width: 480px;
     height: 320px;
+    margin: 0 auto;
     position: relative;
   background: url(img/bg-banner.jpg);
 }
@@ -71,7 +84,7 @@ var bottomlane = [];
 function startGame() {
     myGamePiece = new component(140, 121, "img/machin.png", 10, 120, "image");
     myGamePiece.gravity = 0.05;
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myScore = new component("30px", "Pixellari", "white", 280, 40, "text");
   bottomlane.push(new component(480, 12, "img/hel-bottom.png", 0, 203, "image"));
   bottomlane.push(new component(480, 12, "img/hel-bottom.png", 480, 203, "image"));
     myGameArea.start();
@@ -238,8 +251,18 @@ function updateGameArea() {
         myObstacles[i].x += -1;
         myObstacles[i].update();
     }
-  
-    myScore.text= myGameArea.frameNo;
+    
+    if(myGameArea.frameNo<10)
+      myScore.text= '0000'+myGameArea.frameNo;
+    else if(myGameArea.frameNo<100)
+      myScore.text= '000'+myGameArea.frameNo;
+    else if(myGameArea.frameNo<1000)
+      myScore.text= '00'+myGameArea.frameNo;
+    else if(myGameArea.frameNo<10000)
+      myScore.text= '0'+myGameArea.frameNo;
+    else 
+      myScore.text= myGameArea.frameNo;
+
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
