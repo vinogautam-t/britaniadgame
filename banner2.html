@@ -145,7 +145,7 @@ var myGameArea = {
         this.canvas.height = 215;
         this.context = this.canvas.getContext("2d");
         this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 10);
+        this.interval = setInterval(updateGameArea, 12);
         document.getElementById('banner1').style.display = 'none';
 
           addEventListener('keydown', function (e) {
@@ -206,8 +206,8 @@ function component(width, height, color, x, y, type,z) {
         if (this.y > rockbottom) {
             this.y = rockbottom;
             this.gravitySpeed = 0;
-        } else if (this.y < 0) {
-            this.y = 0;
+        } else if (this.y < 40) {
+            this.y = 40;
             this.gravitySpeed = 0;
         }
     }
@@ -309,8 +309,8 @@ function updateGameArea() {
 
     myScore.update();
 
-    if(myGamePiece.y < 10)
-    myGamePiece.gravity = 0.5;
+    if(myGamePiece.y == 40)
+    myGamePiece.gravity = 0.8;
 
     myGamePiece.newPos();
     myGamePiece.update();
@@ -339,7 +339,7 @@ function everyinterval(n) {
 
 function accelerate() {
     if(myGamePiece.y > 140)
-      myGamePiece.gravity = -0.8;
+      myGamePiece.gravity = -1;
 }
 window.mobilecheck = function () {
     var check = false;
