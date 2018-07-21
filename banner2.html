@@ -30,6 +30,20 @@ body{margin: 0;}
     -webkit-transform: rotate(90deg); /* Safari 3-8 */
     -webkit-transform-origin: 156px 183px; /* Safari 3-8 */
 }
+#gameover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family: 'Pixellari';
+    display: none;
+    margin: auto;
+    width: 174px;
+    height: 30px;
+    font-size: 30px;
+    color: #fff;
+}
 #playarea .banners{
     position: absolute;
     top: 0;
@@ -95,6 +109,7 @@ body{margin: 0;}
         <img style="position: absolute;top:0;left:0;right:0;bottom: 0;margin: auto;" src="img/start-text.png">
         <img class="playbutton bounce" onclick="startGame()" style="position: absolute;left:0;right:0;bottom: 70px;margin: auto;" src="img/pay-button.png">
     </div>
+    <div id="gameover">GAME OVER</div>
     <div id="banner2" class="banners" style="display: none;">
         <img src="img/last-page.jpg">
     </div>
@@ -232,7 +247,8 @@ function gameover(){
         bottomlane[i].update();
     }
   myScore.update();
-    myGamePiece.update();
+  myGamePiece.update();
+  document.getElementById('gameover').style.display = 'block';
   setTimeout(function(){
     document.getElementById('banner2').style.display = 'block';
     clearInterval(myGameArea.interval);
