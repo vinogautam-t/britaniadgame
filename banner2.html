@@ -131,9 +131,9 @@ function startGame() {
 }
 
 var helimage = {
-    1: {x:45, y:33, z:5},
-    2: {x:59, y:43, z:10},
-    3: {x:104, y:75, z:20},
+    1: {x:45, y:33, z:20},
+    2: {x:59, y:43, z:25},
+    3: {x:76, y:55, z:30},
     4: {x:90, y:33, z:5}
 }
 
@@ -145,7 +145,7 @@ var myGameArea = {
         this.canvas.height = 215;
         this.context = this.canvas.getContext("2d");
         this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 12);
+        this.interval = setInterval(updateGameArea, 8);
         document.getElementById('banner1').style.display = 'none';
 
           addEventListener('keydown', function (e) {
@@ -222,11 +222,21 @@ function component(width, height, color, x, y, type,z) {
         var otherbottom = otherobj.y + (otherobj.height);
         var crash = true;
         if(power === undefined){
-          if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft + otherobj.z) || (myleft > otherright)) {
+          spacebtw = 0
+          if(otherobj.z !== 0){
+            mypos = 154 - mytop;
+            if(mypos !== 0){
+              console.log(otherobj, helimage[otherobj.z])
+              calcper = (helimage[otherobj.z].y / mypos)*100;
+              spacebtw = (helimage[otherobj.z].z * calcper)/100;
+            }
+          }
+          spacebtw = spacebtw + 20;
+          if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft + spacebtw) || (myleft > otherright - spacebtw)) {
               crash = false;
           }
         } else {
-          if ((mybottom < othertop+5) || (mytop > otherbottom+15) || (myright < otherleft+10) || (myleft > otherright+7)) {
+          if ((mybottom < othertop+5) || (mytop > otherbottom+15) || (myright < otherleft+10) || (myleft > otherright-7)) {
               crash = false;
           }
         }
@@ -265,7 +275,7 @@ function updateGameArea() {
         } 
     }
   
-  if(!!myPower && myGamePiece.crashWith(myPower)){
+  if(!!myPower && myGamePiece.crashWith(myPower, 1)){
     myPower = null;
   }
   
@@ -273,23 +283,17 @@ function updateGameArea() {
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(500)) {
 
-        randimage = (Math.floor(Math.random() * 4) + 1);
-    
-        myObstacles.push(new component(helimage[randimage].x, helimage[randimage].y, "img/hel"+randimage+'.png', myGameArea.canvas.width, myGameArea.canvas.height - helimage[randimage].y, "image", helimage[randimage].z));
+        randimage = (Math.floor(Math.random() * 5) + 1);
+        if(myGameArea.frameNo > 1000 && randimage === 4)
+          myObstacles.push(new component(55, 21, "img/bom.png", myGameArea.canvas.width, 150, "image", 0));
+        else if(myGameArea.frameNo > 1000 && randimage === 5)
+          myPower = new component(85, 87, "img/power.png", myGameArea.canvas.width, 50, "image", 5);
+        else{
+          randimage = (randimage%3)+1;
+          myObstacles.push(new component(helimage[randimage].x, helimage[randimage].y, "img/hel"+randimage+'.png', myGameArea.canvas.width, myGameArea.canvas.height - helimage[randimage].y, "image", randimage));
+        }
     }
   
-  var offpowernbomb = 1;
-
-  if(offpowernbomb){
-    if (everyinterval(625)) {
-  
-      randvalue = (Math.floor(Math.random() * 2) + 1);
-      if(randvalue === 1)
-        myObstacles.push(new component(85, 32, "img/bom.png", myGameArea.canvas.width, 130, "image", 0));
-      else
-        myPower = new component(85, 87, "img/power.png", myGameArea.canvas.width, 50, "image", 5);
-    }
-  }
   
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
