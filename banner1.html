@@ -63,8 +63,7 @@ body{margin: 0;}
 	    <div id="canvas"></div>
 	    <img id="machine" class="animate" src="img/machin.png">
 	    <span id="showatlast">
-	    	<a href="#" class="download">DOWNLOAD</a>
-	    	<a href="#" class="play"><img src="img/google-play.png" alt=""></a>
+	    	<a target="blank" href="https://play.google.com/store/apps/details?id=com.britannia.treatonaut" class="play"><img src="img/google-play.png" alt=""></a>
 	    </span>
 	</div>
     <script type="text/javascript">
@@ -137,9 +136,6 @@ body{margin: 0;}
 	            	 document.getElementById('machine').style.left = (x-70)+'px';
 	            }
 
-				if (!canvas.isDrawing) {
-	               return;
-	            }
 	            erasecount++;
 	            var radius = 30; // or whatever
 	            var fillColor = '#ff0000';
@@ -175,9 +171,8 @@ body{margin: 0;}
 	            } else {
 	            	 document.getElementById('machine').style.left = (x-70)+'px';
 	            }
-				if (!canvas.isDrawing) {
-	               return;
-	            }
+
+
 	            erasecount++;
 	            var radius = 30; // or whatever
 	            var fillColor = '#ff0000';
