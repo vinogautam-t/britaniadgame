@@ -285,7 +285,7 @@ function updateGameArea() {
 
         randimage = (Math.floor(Math.random() * 5) + 1);
         if(myGameArea.frameNo > 1000 && randimage === 4)
-          myObstacles.push(new component(55, 21, "img/bom.png", myGameArea.canvas.width, 150, "image", 0));
+          myObstacles.push(new component(55, 21, "img/bom.png", myGameArea.canvas.width, 170, "image", 0));
         else if(myGameArea.frameNo > 1000 && randimage === 5)
           myPower = new component(85, 87, "img/power.png", myGameArea.canvas.width, 50, "image", 5);
         else{
@@ -313,7 +313,7 @@ function updateGameArea() {
 
     myScore.update();
 
-    if(myGamePiece.y == 40)
+    if(myGamePiece.y == 60)
     myGamePiece.gravity = 0.8;
 
     myGamePiece.newPos();
