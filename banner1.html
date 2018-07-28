@@ -25,7 +25,7 @@ body{margin: 0;}
     width: 320px;
     height: 480px;
 }
-#machine{position: absolute;left: 90px;top: 190px;pointer-events: none;}
+#machine{position: absolute;left: 78px;top: 200px;pointer-events: none;width: 160px;}
 .animate{
     transform-origin: -20% -20%;
     animation: jump 1s linear alternate infinite;
@@ -36,8 +36,8 @@ body{margin: 0;}
     align-items: center;
 }
 @keyframes jump {
-  0%   {transform: translate(0,-30%);}
-  100% {transform: translate(0,30%);}
+  0%   {transform: translate(0,-20%);}
+  100% {transform: translate(0,20%);}
 }
 @keyframes big {
   0%   {transform: scale(0.7,0.7)}
@@ -61,7 +61,7 @@ body{margin: 0;}
 <body>
     <div id="playarea">
 	    <div id="canvas"></div>
-	    <img id="machine" class="animate" src="img/machin.png">
+	    <img id="machine" class="animate" src="img/my-cursor.png">
 	    <span id="showatlast">
 	    	<a target="blank" href="https://play.google.com/store/apps/details?id=com.britannia.treatonaut" class="play"><img src="img/google-play.png" alt=""></a>
 	    </span>
@@ -119,25 +119,25 @@ body{margin: 0;}
 	            document.getElementById('machine').classList.remove("animate");
 
 	            
-	            if(y <= 60){
+	            if(y <= 70){
 	            	 document.getElementById('machine').style.top = '0px';
-	            } else if (y >= 260){
-	            	 y = 260;
-	            	 document.getElementById('machine').style.top = '260px';
+	            } else if (y >= 390){
+	            	 //y = 380;
+	            	 document.getElementById('machine').style.top = '390px';
 	            } else {
-	            	 document.getElementById('machine').style.top = (y-60)+'px';
+	            	 document.getElementById('machine').style.top = (y-70)+'px';
 	            }
 
-	            if(x <= 70){
+	            if(x <= 90){
 	            	 document.getElementById('machine').style.left = '0px';
-	            } else if (x >= 184){
-	            	 document.getElementById('machine').style.left = '184px';
+	            } else if (x >= 160){
+	            	 document.getElementById('machine').style.left = '160px';
 	            } else {
-	            	 document.getElementById('machine').style.left = (x-70)+'px';
+	            	 document.getElementById('machine').style.left = (x-90)+'px';
 	            }
 
 	            erasecount++;
-	            var radius = 30; // or whatever
+	            var radius = 50; // or whatever
 	            var fillColor = '#ff0000';
 	            ctx.globalCompositeOperation = 'destination-out';
 	            ctx.fillCircle(x, y, radius, fillColor);
