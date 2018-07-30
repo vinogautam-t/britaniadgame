@@ -125,6 +125,7 @@ body{margin: 0;}
   -webkit-animation-name: bounce;
   animation-name: bounce;
 }
+#blast{display: none;position: absolute;}
 </style>
 </head>
 <body onload="">
@@ -143,6 +144,7 @@ body{margin: 0;}
         <img class="playbutton zoom" onclick="startGame()" style="position: absolute;left:0;right:0;bottom: 30px;margin: auto;" src="img/pay-button.png">
     </div>
     <div id="gameover">GAME OVER</div>
+    <img id="blast" src="img/blast.gif">
     <div id="banner2" class="banners" style="display: none;">
         <img src="img/last-page.jpg">
     </div>
@@ -273,8 +275,11 @@ function component(width, height, color, x, y, type,z,pos) {
 
 function gameover(){
   myGameArea.clear();
-  myGamePiece.image = new Image();
-  myGamePiece.image.src = 'img/blast.png';
+  document.getElementById('blast').style.display = 'block';
+  document.getElementById('blast').src = "img/blast.gif";
+  
+  document.getElementById('blast').style.top = myGamePiece.y+"px";
+  document.getElementById('blast').style.left = myGamePiece.x+"px";
   for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
     }
