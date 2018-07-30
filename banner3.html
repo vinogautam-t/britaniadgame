@@ -126,6 +126,23 @@ body{margin: 0;}
   animation-name: bounce;
 }
 #blast{display: none;position: absolute;}
+
+@keyframes big {
+  0%   {transform: scale(0.7,0.7)}
+  100% {transform: scale(0.8,0.8) }
+}
+#showatlast{
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+#showatlast a.download { text-decoration: none; display: inline-block; font-family: 'Pixellari';font-size: 40px;color: #FFFFFF;line-height: 42px;font-weight: 500;text-transform: uppercase;letter-spacing: 0;text-shadow: 3px 2px black;padding: 9px 10px 3px;margin: 0 0 10px 0;letter-spacing: 0.02em; background: url(img/button-bg.png) no-repeat 0 0; background-size: 100% 100%; animation: big 1s linear alternate infinite; }
+#showatlast a.download:hover { text-shadow: 3px 2px #d44d51; }
+#showatlast a.play { display: inline-block; transition: all 0.2s ease-in-out;transform: scale(0.8,0.8) }
+#showatlast a.play:hover {filter:grayscale(100%);transform: scale(0.85,0.85); }
 </style>
 </head>
 <body onload="">
@@ -146,7 +163,11 @@ body{margin: 0;}
     <div id="gameover">GAME OVER</div>
     <img id="blast" src="img/blast.gif">
     <div id="banner2" class="banners" style="display: none;">
-        <img src="img/last-page.jpg">
+        <img src="img/banner3.jpg">
+        <span id="showatlast">
+          <a target="blank" href="https://play.google.com/store/apps/details?id=com.britannia.treatonaut" class="play playandorid"><img src="img/playstore3.png" alt=""></a>
+          <a target="blank" href="https://itunes.apple.com/us/app/treatanaut/id1416551529?ls=1&mt=8" class="play playios"><img src="img/ioslink3.png" alt=""></a>
+        </span>
     </div>
 </div>
 <script>
@@ -289,7 +310,7 @@ function gameover(){
   document.getElementById('gameover').style.display = 'block';
   setTimeout(function(){
     document.getElementById('banner2').style.display = 'block';
-  }, 3000);
+  }, 2000);
   clearInterval(myGameArea.interval);
 }
 

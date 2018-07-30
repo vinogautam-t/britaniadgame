@@ -46,7 +46,7 @@ body{margin: 0;}
 #showatlast{
     display: none;
     position: absolute;
-    bottom: 65px;
+    bottom: 35px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -63,7 +63,8 @@ body{margin: 0;}
 	    <div id="canvas"></div>
 	    <img id="machine" class="animate" src="img/my-cursor.png">
 	    <span id="showatlast">
-	    	<a target="blank" href="https://play.google.com/store/apps/details?id=com.britannia.treatonaut" class="play"><img src="img/google-play.png" alt=""></a>
+	    	<a target="blank" href="https://play.google.com/store/apps/details?id=com.britannia.treatonaut" class="play playandorid"><img src="img/playstore3.png" alt=""></a>
+	    	<a target="blank" href="https://itunes.apple.com/us/app/treatanaut/id1416551529?ls=1&mt=8" class="play playios"><img src="img/ioslink3.png" alt=""></a>
 	    </span>
 	</div>
     <script type="text/javascript">
@@ -99,14 +100,14 @@ body{margin: 0;}
         		image.src = 'img/front-banner.jpg';
         		image.onload = function() {
 		            ctx.drawImage(image, 0, 0, 320, 480);
-		            document.getElementById('playarea').style.background = "url(img/back-banner.jpg)";
+		            document.getElementById('playarea').style.background = "url(img/banner1.jpg)";
 		        }
 	        };
 	        ctx.clearTo();
 
 	        // bind mouse events
 	        canvas.node.onmousemove = function(e) {
-	            if(erasecount > 250){
+	            if(erasecount > 150){
 	            	ctx.clearRect(0, 0, 320, 480);
 	            	document.getElementById('machine').style.display = "none";
 	            	document.getElementById('showatlast').style.display = "block";
@@ -143,7 +144,7 @@ body{margin: 0;}
 	            ctx.fillCircle(x, y, radius, fillColor);
 	        };
 	        canvas.node.ontouchmove = function(e) {
-	            if(erasecount > 250){
+	            if(erasecount > 150){
 	            	ctx.clearRect(0, 0, 320, 480);
 	            	document.getElementById('machine').style.display = "none";
 	            	document.getElementById('showatlast').style.display = "block";
