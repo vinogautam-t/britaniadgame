@@ -483,9 +483,15 @@ function swipedetect(el, callback){
         }*/
 
         if(window.orientation === 0){
-          swipedir = (distY < 0)? 'left' : 'right'
+          if(distY === 0)
+            swipedir = (touchobj.pageY < myGamePiece.y)? 'left' : 'right';
+          else
+            swipedir = (distY < 0)? 'left' : 'right';
         } else {
-          swipedir = (distX < 0)? 'left' : 'right'
+          if(distX === 0)
+            swipedir = (touchobj.pageX < myGamePiece.x)? 'left' : 'right';
+          else
+            swipedir = (distX < 0)? 'left' : 'right'
         }
 
         handleswipe(swipedir)
