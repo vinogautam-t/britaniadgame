@@ -278,8 +278,8 @@ function gameover(){
   document.getElementById('blast').style.display = 'block';
   document.getElementById('blast').src = "img/blast.gif";
   
-  document.getElementById('blast').style.top = myGamePiece.y+"px";
-  document.getElementById('blast').style.left = myGamePiece.x+"px";
+  document.getElementById('blast').style.top = (myGamePiece.y-100)+"px";
+  document.getElementById('blast').style.left = (myGamePiece.x-40)+"px";
   for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].update();
     }
