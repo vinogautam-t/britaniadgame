@@ -148,12 +148,12 @@ body{margin: 0;}
 <body onload="">
 <div id="playarea" class="">
     <canvas id="canvas"></canvas>
-  <div class="canvas_frame">
+  <!--<div class="canvas_frame">
     <div class="cfleft"></div>
     <div class="cfright"></div>
     <div class="cftop"></div>
     <div class="cfbottom"></div>
-  </div>
+  </div>-->
     <div id="banner1" class="banners">
         <img src="img/banner3/banner.jpg">
         <img style="position: absolute;top:85px;left:0;right:0;margin: auto;" src="img/banner3/first-page-text.png">
@@ -401,7 +401,7 @@ function startGame() {
     myScore = new component("35px", "Pixellari", "white", 380, 40, "text");
     myGameArea.start();
 
-    var el = document.getElementById('playarea');
+    var el = document.getElementById('canvas');
     swipedetect(el, function(swipedir){
         if (swipedir == 'left' || swipedir == 'up'){
           move_left_right(-1);
